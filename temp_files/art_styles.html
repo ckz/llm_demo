@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>艺术大师风格展示</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+        .card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        .card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-bottom: 2px solid #333;
+        }
+        .card-content {
+            padding: 25px;
+        }
+        .card-title {
+            font-size: 1.5em;
+            color: #fff;
+            margin: 0 0 15px 0;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+        .card-description {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .style-features {
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .style-features h3 {
+            color: #fff;
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .feature-list li {
+            color: #ddd;
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "•";
+            color: #666;
+            position: absolute;
+            left: 0;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+        .pagination button {
+            background: #333;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .pagination button:hover {
+            background: #444;
+        }
+        .pagination button.active {
+            background: #666;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>艺术大师风格展示</h1>
+        
+        <!-- 第一页 -->
+        <div class="page active" id="page1">
+            <div class="grid">
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/fGoP2kjpaI1acK5g5EJdHBwzlYj9yCMlxRsfjAPc6TEzKGSUA/out-0.webp" alt="梵高印象派">
+                    <div class="card-content">
+                        <h2 class="card-title">梵高印象派</h2>
+                        <p class="card-description">充满情感和动感的笔触，强烈的色彩对比，以及独特的漩涡状构图，展现了梵高标志性的艺术风格。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>强烈的笔触感和厚重的颜料层次</li>
+                                <li>鲜艳的色彩和大胆的对比</li>
+                                <li>富有情感的自然描绘</li>
+                                <li>独特的漩涡状构图</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/XSEwOvew0MRDHidJse8NerhdTdZNTZXFfVOP3vfZIpBpXxQiC/out-0.webp" alt="超现实主义">
+                    <div class="card-content">
+                        <h2 class="card-title">超现实主义</h2>
+                        <p class="card-description">打破现实逻辑的梦幻场景，将不可能的元素组合在一起，创造出超越现实的艺术世界。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>非理性的画面组合</li>
+                                <li>梦境般的氛围</li>
+                                <li>象征性的物体表达</li>
+                                <li>现实与虚幻的融合</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/poaKYbMVq4LvHtriify4bxaK3wuenjwFfTnGVHiIHencsYIRB/out-0.webp" alt="赛博朋克">
+                    <div class="card-content">
+                        <h2 class="card-title">赛博朋克</h2>
+                        <p class="card-description">未来主义与后现代颓废的完美结合，霓虹灯光与黑暗街道构建出独特的未来世界。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>霓虹色彩的强烈对比</li>
+                                <li>高科技与低生活的融合</li>
+                                <li>未来主义建筑设计</li>
+                                <li>电子朋克美学</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/BVNOADkdiZppPRP2naUCpGDrqzajjlGj6emYgYTjhHapFDJKA/out-0.webp" alt="日式扁平化">
+                    <div class="card-content">
+                        <h2 class="card-title">日式扁平化</h2>
+                        <p class="card-description">受村上隆影响的超扁平艺术风格，结合了日本流行文化元素与现代艺术理念。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>鲜艳的色彩搭配</li>
+                                <li>扁平化的图形设计</li>
+                                <li>可爱元素的运用</li>
+                                <li>简约而富有表现力</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/vyH8H0rVqIaXKN72URneuh0EpG89HjWKOeL2qnfU7gi3WMkoA/out-0.webp" alt="双重曝光">
+                    <div class="card-content">
+                        <h2 class="card-title">双重曝光</h2>
+                        <p class="card-description">通过叠加不同的图像层次，创造出梦幻般的视觉效果，展现出独特的艺术美感。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>多层图像的叠加</li>
+                                <li>虚实结合的视觉效果</li>
+                                <li>朦胧梦幻的氛围</li>
+                                <li>自然与人像的融合</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/ONA8pV8IBoq4N9DsLoZj5JGDfmreJ4fDY08fA0CJV4CN4YIRB/out-0.webp" alt="简笔画">
+                    <div class="card-content">
+                        <h2 class="card-title">简笔画风格</h2>
+                        <p class="card-description">受毕加索线条艺术启发，用单一连续的线条创造出优雅流畅的艺术作品，展现出极简主义的纯粹美感。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>连续流畅的线条</li>
+                                <li>优雅的曲线表现</li>
+                                <li>极简主义的美学</li>
+                                <li>富有表现力的抽象形态</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/BpcitnZdlVZCFJYelFwupEyLMGjmF5ieOE1rfZrLDjQbXMkoA/out-0.webp" alt="蒸汽波">
+                    <div class="card-content">
+                        <h2 class="card-title">蒸汽波美学</h2>
+                        <p class="card-description">结合复古电子艺术与现代设计元素，创造出独特的后现代审美风格。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>复古科技元素</li>
+                                <li>粉色和蓝色的色调</li>
+                                <li>几何图形的运用</li>
+                                <li>怀旧文化符号</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/DGh1axC8Dt7sGFFxfJZTaOXhLqIbgLaeupbmf0MOnndsXMkoA/out-0.webp" alt="未来主义">
+                    <div class="card-content">
+                        <h2 class="card-title">未来主义</h2>
+                        <p class="card-description">强调速度、力量和动态美感，通过分解和重组创造出充满活力的艺术作品。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>动态的线条表现</li>
+                                <li>几何形状的分解</li>
+                                <li>强烈的运动感</li>
+                                <li>科技感的表达</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/JGVcTrqOs25kHpZLxjvrXgBepeT3dWVIxqe3ZBECgdDfvYIRB/out-0.webp" alt="H.R. Giger">
+                    <div class="card-content">
+                        <h2 class="card-title">H.R. Giger风格</h2>
+                        <p class="card-description">生物机械风格的代表，融合有机体与机械结构，创造出独特的黑暗未来世界。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>生物与机械的融合</li>
+                                <li>暗黑系色调</li>
+                                <li>细节丰富的纹理</li>
+                                <li>科幻恐怖的氛围</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/eNgNw5MpL8Sft0TGu8EpCLxCBKpEdUHT4FjbaYR7cmOIMGSUA/out-0.webp" alt="表现主义">
+                    <div class="card-content">
+                        <h2 class="card-title">表现主义</h2>
+                        <p class="card-description">通过强烈的情感表达和扭曲的形态，展现内心世界与心理状态。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>强烈的情感表达</li>
+                                <li>扭曲变形的形态</li>
+                                <li>大胆的色彩运用</li>
+                                <li>深刻的心理暗示</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二页 -->
+        <div class="page" id="page2">
+            <div class="grid">
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/jmqkhphlkIZwGFH7F6wDUDtDQ38hlfHTheAcwLBNRjc9PGSUA/out-0.webp" alt="水彩艺术">
+                    <div class="card-content">
+                        <h2 class="card-title">水彩艺术</h2>
+                        <p class="card-description">柔和流动的色彩与精致的水彩技法，创造出梦幻般的艺术效果。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>色彩的自然流动</li>
+                                <li>层次丰富的透明效果</li>
+                                <li>柔和的色彩过渡</li>
+                                <li>水墨晕染的质感</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/BP5pPkep8EQLX6Qp202f5jx0piEqfCkQgcD7EXfRiyeMByQiC/out-0.webp" alt="立体主义">
+                    <div class="card-content">
+                        <h2 class="card-title">立体主义</h2>
+                        <p class="card-description">打破传统视角，通过几何形状的重组展现多维度的艺术表达。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>几何形状的分解</li>
+                                <li>多角度的视觉呈现</li>
+                                <li>抽象的空间构成</li>
+                                <li>平面与立体的结合</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/ISbGfCFsmLyrMCZ1nYTef6VQstswqM8V4S1OI0rdwqWkgMkoA/out-0.webp" alt="点彩派">
+                    <div class="card-content">
+                        <h2 class="card-title">点彩派</h2>
+                        <p class="card-description">通过细小的色点构建画面，创造出独特的光学混色效果。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>点状笔触的堆积</li>
+                                <li>色彩的光学混合</li>
+                                <li>精细的画面构成</li>
+                                <li>明亮的色彩效果</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/RwowAqJ2g8YXJVVAtWEX93aQQaiWSfzrtmjIUTK1nSdSIDJKA/out-0.webp" alt="波普艺术">
+                    <div class="card-content">
+                        <h2 class="card-title">波普艺术</h2>
+                        <p class="card-description">将流行文化元素转化为艺术，展现现代社会的视觉特征。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>大胆的原色使用</li>
+                                <li>重复的图案元素</li>
+                                <li>商业艺术的影响</li>
+                                <li>现代流行文化符号</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/GIfe2vB2ikmhy0unMaSkwljt9jnKLZgSpShOUaQnaRgtQGSUA/out-0.webp" alt="哥特式">
+                    <div class="card-content">
+                        <h2 class="card-title">哥特式</h2>
+                        <p class="card-description">展现中世纪建筑艺术的精髓，充满神秘感和宗教色彩。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>尖拱的建筑特征</li>
+                                <li>精细的石雕装饰</li>
+                                <li>彩绘玻璃艺术</li>
+                                <li>宗教象征符号</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/N1faj4jNfwjqMUoRT0IZN8phhyBJ6HBnoCZLb8KqAui6QGSUA/out-0.webp" alt="抽象表现主义">
+                    <div class="card-content">
+                        <h2 class="card-title">抽象表现主义</h2>
+                        <p class="card-description">通过自发性的绘画动作，展现艺术家的内心情感。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>即兴的绘画表现</li>
+                                <li>强烈的情感表达</li>
+                                <li>抽象的形式语言</li>
+                                <li>大尺度的画面效果</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/fjSBpQNYeLu790fC4X0UTfoNEbGZlESnZRcaTw9cwy6QEZIRB/out-0.webp" alt="极简主义">
+                    <div class="card-content">
+                        <h2 class="card-title">极简主义</h2>
+                        <p class="card-description">追求纯粹的形式美，用最简单的元素表达深刻的艺术思想。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>简约的形式语言</li>
+                                <li>有限的色彩运用</li>
+                                <li>几何形状的构成</li>
+                                <li>空间的留白处理</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/221h3rbtTfRUCiCbryzcfke8s8PAh3rUtHcBJ0B3S6rsiMkoA/out-0.webp" alt="新艺术">
+                    <div class="card-content">
+                        <h2 class="card-title">新艺术风格</h2>
+                        <p class="card-description">优雅流畅的线条与自然形态的完美结合，展现独特的装饰艺术。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>有机的曲线设计</li>
+                                <li>自然元素的图案</li>
+                                <li>精致的装饰细节</li>
+                                <li>优雅的女性形象</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/AklKRSSNcGLYNhlUu4eh7kEQWYHRyTnSv8FxGB4FpH6wIDJKA/out-0.webp" alt="拼贴艺术">
+                    <div class="card-content">
+                        <h2 class="card-title">拼贴艺术</h2>
+                        <p class="card-description">将不同的视觉元素组合重构，创造出新的艺术语言。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>多元素的组合</li>
+                                <li>材质的混搭效果</li>
+                                <li>层次感的营造</li>
+                                <li>意外的视觉冲突</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://replicate.delivery/xezq/NeMkpdEtxaxmK6pWffi27uuFfoNEL4GRFeuxHlnQbfs9akhEF/out-0.webp" alt="像素艺术">
+                    <div class="card-content">
+                        <h2 class="card-title">像素艺术</h2>
+                        <p class="card-description">复古游戏风格的数字艺术，展现独特的像素美学。</p>
+                        <div class="style-features">
+                            <h3>风格特点：</h3>
+                            <ul class="feature-list">
+                                <li>方块状的画面构成</li>
+                                <li>限制的色彩palette</li>
+                                <li>复古游戏的风格</li>
+                                <li>精确的像素排列</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <button onclick="showPage(1)" class="active">1</button>
+            <button onclick="showPage(2)">2</button>
+        </div>
+    </div>
+
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="放大图片">
+    </div>
+
+    <script>
+        // 分页功能
+        function showPage(pageNum) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.querySelectorAll('.pagination button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById('page' + pageNum).classList.add('active');
+            document.querySelector(`.pagination button:nth-child(${pageNum})`).classList.add('active');
+        }
+
+        // 图片放大功能
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        document.querySelectorAll('.card img').forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+            });
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
